@@ -10,7 +10,10 @@ const imageSchema = new Schema({
     },
     description: {
         type: String
-    }
+    },
+    cloudinary_url: {
+        type: String
+    },
 })
 
 const Image = mongoose.model('Image', imageSchema)
