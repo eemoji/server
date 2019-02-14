@@ -43,9 +43,9 @@ module.exports = {
             title: data.title,
             description: data.description
         }
-        if (req.file) {
+        /*if (req.file) {
             newImage.image_url = req.file.cloudStoragePublicUrl
-        }
+        }*/
         Image
             .findByIdAndUpdate(req.params.imageId, newImage, { new: true })
             .then(image => {
