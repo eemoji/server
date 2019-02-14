@@ -12,7 +12,7 @@ const storage = new Storage({
 const bucket = storage.bucket(CLOUD_BUCKET)
 
 const getPublicUrl = (filename) => {
-  return `https://storage.googleapis.com/${CLOUD_BUCKET}/eemoji/uploads/${filename}`
+  return `https://storage.googleapis.com/${CLOUD_BUCKET}/${filename}`
 }
 
 const sendUploadToGCS = (req, res, next) => {
@@ -20,7 +20,7 @@ const sendUploadToGCS = (req, res, next) => {
     return next()
   }
 
-  const gcsname = Date.now() + req.file.originalname
+  const gcsname = 'eemoji/uploads/'+ Date.now() + req.file.originalname
   const file = bucket.file(gcsname)
 
   const stream = file.createWriteStream({
