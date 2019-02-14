@@ -6,7 +6,7 @@ const images = require('../helpers/images')
 router
   .get('/', image.getAll)
   .post('/',
-    images.multer.single('articleFile'),
+    images.multer.single('image'),
     images.sendUploadToGCS,
     image.create)
   .put('/:imageId', image.update)
