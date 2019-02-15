@@ -1,14 +1,14 @@
 const Image = require('../models/images')
+const cloudinary = require('cloudinary');
 
 module.exports = {
     create(req, res) {
-        /*let data = JSON.parse(req.body.data)
+        let data = JSON.parse(req.body.data)
         let newImage = {
             title: data.title,
             description: data.description
-        }*/
-        let newImage = {}
-        var cloudinary = require('cloudinary');
+        }
+        //let newImage = {}
 
         cloudinary.config({
             cloud_name: process.env.CLOUDINARY_cloud_name,
