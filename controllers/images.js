@@ -11,20 +11,17 @@ module.exports = {
         var cloudinary = require('cloudinary');
 
         cloudinary.config({
-            cloud_name: 'dsx8wtzk7',
-            api_key: '188765111838334',
-            api_secret: 'cRfe30xrBa63BFkoycZAxL5ugNs'
+            cloud_name: process.env.CLOUDINARY_cloud_name,
+            api_key: process.env.CLOUDINARY_api_key,
+            api_secret: process.env.CLOUDINARY_api_secret,
         });
 
         cloudinary.uploader.upload(req.file.cloudStoragePublicUrl, function (result) {
             console.log(result)
-            /*
-            test@veryrealemail.com
-            */
 
             if (req.file) {
                 newImage.image_url = req.file.cloudStoragePublicUrl
-                newImage.cloudinary_url=result.secure_url
+                newImage.cloudinary_url = result.secure_url
             }
             Image
                 .create(newImage)
