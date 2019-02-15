@@ -73,11 +73,9 @@ module.exports = {
         let data = JSON.parse(req.body.data)
         let newImage = {
             title: data.title,
-            description: data.description
+            description: data.description,
+            image_url: data.image_url
         }
-        /*if (req.file) {
-            newImage.image_url = req.file.cloudStoragePublicUrl
-        }*/
         Image
             .findByIdAndUpdate(req.params.imageId, newImage, { new: true })
             .then(image => {
