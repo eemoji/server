@@ -14,6 +14,9 @@ const imageSchema = new Schema({
     cloudinary_url: {
         type: String
     },
+    createdAt: {
+        type: Date
+    },
 })
 
 const Image = mongoose.model('Image', imageSchema)

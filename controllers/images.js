@@ -6,7 +6,8 @@ module.exports = {
         let data = JSON.parse(req.body.data)
         let newImage = {
             title: data.title,
-            description: data.description
+            description: data.description,
+            createdAt: new Date(),
         }
         //let newImage = {}
 
@@ -39,7 +40,7 @@ module.exports = {
     },
     getAll(req, res) {
         Image
-            .find()
+            .find().sort({ createdAt: -1 }).limit(100)
             .then(images => {
                 res.status(200).json(images)
             })
