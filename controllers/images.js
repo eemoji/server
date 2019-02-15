@@ -18,7 +18,6 @@ module.exports = {
         });
 
         cloudinary.uploader.upload(req.file.cloudStoragePublicUrl, function (result) {
-            console.log(result)
 
             if (req.file) {
                 newImage.image_url = req.file.cloudStoragePublicUrl
@@ -39,9 +38,27 @@ module.exports = {
         });
     },
     getAll(req, res) {
+        let effectsStr = `al_dente,athena,audrey,aurora,daguerre,eucalyptus,fes,frost,hairspray,hokusai,incognito,linen,peacock,primavera,quartz,red_rock,refresh,sizzle,sonnet,ukulele,zorro`
+        let effects = effectsStr.split(',')
+
         Image
-            .find().sort({ createdAt: -1 }).limit(100)
+            .find().sort({ createdAt: -1 }).limit(100).lean()
             .then(images => {
+                for (let image of images) {
+                    if (image.cloudinary_url) {
+                        image.effects = []
+                        let urlSplit = image.cloudinary_url.split('/')
+
+                        for (let effect of effects) {
+                            let url = [...urlSplit]
+                            url.splice(6, 0, 'e_art:' + effect)
+                            image.effects.push({
+                                name: effect,
+                                url: url.join('/')
+                            })
+                        }
+                    }
+                }
                 res.status(200).json(images)
             })
             .catch(err => {
