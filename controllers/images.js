@@ -70,11 +70,11 @@ module.exports = {
             })
     },
     update(req, res) {
-        let data = JSON.parse(req.body.data)
+        console.log(req.body)
         let newImage = {
-            title: data.title,
-            description: data.description,
-            image_url: data.image_url
+            title: req.body.title,
+            description: req.body.description,
+            image_url: req.body.image_url
         }
         Image
             .findByIdAndUpdate(req.params.imageId, newImage, { new: true })
